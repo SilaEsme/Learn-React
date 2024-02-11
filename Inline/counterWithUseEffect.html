@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>useEffect Hook</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React JS Code below -->    
+    <script type="text/babel">
+        function Counter(props) {
+            const [counterValue, setCounterValue] = React.useState(props.initialValue);
+
+            // Similar to componentDidMount and componentDidUpdate:
+            // Gets called right after the component is rendered.
+            React.useEffect(() => {
+              // Update the document title using the browser API
+              document.title = `Counter Value: ${counterValue}`;
+            });
+
+            return (
+                <div style={{fontSize: '20px'}}>
+                    <p><b>Counter Value:</b> {counterValue} </p>
+                    <button onClick={()=>{setCounterValue(counterValue+1)}}>Increment</button>{' '}
+                    <button onClick={()=>{setCounterValue(counterValue-1)}}>Decrement</button>
+                </div>
+            );
+        } // end-Counter
+
+        function App() {
+            return (
+              <div>
+                  <Counter initialValue={0}/>
+              </div>
+            );
+        } // end-App
+
+        // Render the App component on the screen
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
