@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>First React App with JSX</title>
+
+<!-- Load React API -->
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<!-- Load React DOM-->
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<!-- Load Babel Compiler -->
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class Counter extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {counterValue: props.initialValue}
+            }
+            Increment = () =>{this.setState({counterValue : this.state.counterValue + 1})}
+            Decrement = () =>{this.setState({counterValue : this.state.counterValue - 1})}
+
+            render() {
+                return (
+                    <div>
+                        <h3>{this.state.counterValue}</h3>
+                        <button onClick={this.Increment}> Increment </button>
+                        <button onClick={this.Decrement}> Decrement </button>
+                    </div>
+                );
+            } // end-render
+        } // end-Counter
+
+        ReactDOM.render(<Counter initialValue = {0}/>, document.getElementById('root'));
+    </script>
+
+</body>
+
+</html>
