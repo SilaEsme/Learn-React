@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React List</title>
+    <!-- Load React API -->
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <!-- Load React DOM-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <!-- Load Babel Compiler -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function createInitialTodos() {
+        const initialTodos = [];
+        for (let i = 0; i < 6; i++) {
+          initialTodos.push({
+            id: i,
+            text: "Item " + (i + 1),
+          });
+        }
+        return initialTodos;
+      }
+      function List() {
+        const [todos, setTodos] = React.useState(createInitialTodos);
+        const [text, setText] = React.useState("");
+
+        return (
+          <div>
+            <input
+              type="text"
+              value=""
+              onChange={() => setText(e.target.value)}
+            />
+            <input
+              type="button"
+              value="Add"
+              onClick={() => {
+                setTodos([
+                  {
+                    id: todos.length,
+                    text: text,
+                  },
+                  ...todos,
+                ]);
+              }}
+            />
+            <ul class="list-group">
+              {todos.map((item) => (
+                <li
+                  key={item.id}
+                  class="list-group-item d-flex justify-content-between align-items-center active"
+                >
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      function App() {
+        return <List />;
+      } // end-App
+
+      // Render the App component on the screen
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
